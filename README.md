@@ -105,11 +105,12 @@ module list
 eb --version
 ```
 
+The EasyBuild version must be 4.2.0 or newer.
+
 Step 3: Build the foss-2019b toolchain
 --------------------------------------
 
-EasyBuild version 4.2.0 (and later) contains the foss-2019b toolchain
-which is used to build GPAW.
+EasyBuild version 4.2.0 (and newer) contains the foss-2019b toolchain which must be used to build GPAW.
 The foss toolchain contains the following modules:
 
 ```
@@ -144,7 +145,7 @@ Currently Loaded Modules:
 Step 4: Build the intel-2019b toolchain
 ---------------------------------------
 
-EasyBuild version 4.2.0 (and later) contains the intel-2019b toolchain which is used to build GPAW.
+EasyBuild version 4.2.0 (and later) contains the intel-2019b toolchain which must be used to build GPAW.
 The intel toolchain contains the following modules:
 
 ```
@@ -152,22 +153,21 @@ icc, ifort, imkl, impi
 ```
 
 The Intel compilers icc, ifort, the MKL and MPI libraries are products offered by Intel.
+The intel-2019b toolchain requires exactly the Intel *Parallel Studio XE 2019 Update 5* version.
 
 There are useful hints about Intel compiler installation and licenses in the web page
 https://wiki.fysik.dtu.dk/niflheim/EasyBuild_modules#intel-compiler-toolchains
 
-Specify your Intel <license-server> host port 28518 (for example) or just the 
-license file path:
+Specify your Intel *license-server* host port 28518 (for example) or just the license file path:
 
 ```
 export INTEL_LICENSE_FILE=28518@<license-server>
 export INTEL_LICENSE_FILE=<file-path>
 ```
 
-To build the intel-2019b toolchain first download the compiler tar-ball files
-as described in 
+To build the intel-2019b toolchain first download the compiler and library tar-ball files as described in 
 https://wiki.fysik.dtu.dk/niflheim/EasyBuild_modules#intel-compiler-toolchains
-and move these files to the EasyBuild source directories.
+and move these files to the EasyBuild source directories:
 
 ```
 mkdir -p $HOME/modules/sources/i/icc $HOME/modules/sources/i/ifort $HOME/modules/sources/i/imkl $HOME/modules/sources/i/impi
@@ -220,12 +220,18 @@ Run GPAW verification tests
 
 The GPAW verification tests are described in https://wiki.fysik.dtu.dk/gpaw/install.html#run-the-tests
 
+First select ONE of the GPAW modules as built in the above:
+```
+module load GPAW/20.1.0-intel-2019b-Python-3.7.4
+# module load GPAW/20.1.0-foss-2019b-Python-3.7.4
+module list
+```
+
 The verification tests should be executed with 8 single-threaded MPI tasks by:
 
 ```
-module load GPAW
 export OMP_NUM_THREADS=1 
-mpiexec gpaw -P 8 python test 
+gpaw -P 8 test 
 ```
 
 Warning messages and “SKIPPED” tests in the test suite output are accepted, but FAILED tests are not acceptable and must be corrected.
