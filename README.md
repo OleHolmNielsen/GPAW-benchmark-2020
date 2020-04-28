@@ -3,8 +3,7 @@
 GPAW code building instructions and benchmark data
 --------------------------------------------------
 
-The purpose of this page is to document the building of the
-[GPAW](https://wiki.fysik.dtu.dk/gpaw/) code release version 20.1.0.
+The purpose of this page is to document the building of the [GPAW](https://wiki.fysik.dtu.dk/gpaw/) code release version 20.1.0.
 Subsequently a GPAW test and a GPAW benchmark run is documented.
 
 The benchmarks are designed to reflect our HPC software environment,
