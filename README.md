@@ -169,7 +169,7 @@ https://wiki.fysik.dtu.dk/niflheim/EasyBuild_modules#intel-compiler-toolchains
 and move these files to the EasyBuild source directories:
 
 ```
-mkdir -p $HOME/modules/sources/i/icc $HOME/modules/sources/i/ifort $HOME/modules/sources/i/imkl $HOME/modules/sources/i/impi
+mkdir -p $HOME/modules/sources/i/iccifort $HOME/modules/sources/i/imkl $HOME/modules/sources/i/impi
 mv parallel_studio_xe_2019_update5_composer_edition.tgz $HOME/modules/sources/i/iccifort/
 mv l_mkl_2019.5.281.tgz $HOME/modules/sources/i/imkl/
 mv l_mpi_2018.5.288.tgz $HOME/modules/sources/i/impi/
