@@ -4,18 +4,18 @@ GPAW code building instructions and benchmark data
 --------------------------------------------------
 
 The purpose of this page is to document the building of the [GPAW](https://wiki.fysik.dtu.dk/gpaw/) code release version 20.1.0.
-Subsequently a GPAW test and a GPAW benchmark run is documented.
+Subsequently a GPAW test and a GPAW benchmark run on a single compute node is documented.
 
 The benchmarks are designed to reflect our HPC software environment,
 and to run some representative physics problems using the GPAW code.
 
-The prerequisite operating system is CentOS 7.7 (or compatible, for example
-Red Hat RHEL 7 Update 7).
+The prerequisite operating system is CentOS 7.7 or 7.8
+(or compatible, for example Red Hat RHEL 7 Update 7 or 8).
 
 We require using the [EasyBuild](https://github.com/hpcugent/easybuild)
 software build and installation framework that allows you to manage
 (scientific) software on High Performance Computing (HPC) systems in an efficient way.
-These instructions are based upon EasyBuild version 4.2.0.
+The present instructions are based upon EasyBuild version 4.2.0.
 
 In order to have a well-defined and reproducible software modules framework 
 for the purpose of comparing benchmark results obtained on different systems,
@@ -34,7 +34,7 @@ The foss toolchain uses only Open Source software,
 whereas the intel toolchain requires licensed Intel C and Fortran compilers 
 as well as the Intel MKL and MPI libraries.
 For systems with processors that include AVX-512 vector support,
-it is expected that the MKL library will offer the best performance.
+it is anticipated that the MKL library may offer a better performance.
 
 Step 1: Installing Lmod
 -----------------------
@@ -109,7 +109,7 @@ The EasyBuild version must be 4.2.0 or newer.
 Step 3: Build the foss-2019b toolchain
 --------------------------------------
 
-EasyBuild version 4.2.0 (and newer) contains the foss-2019b toolchain which must be used to build GPAW.
+EasyBuild version 4.2.0 (and newer) contains the foss-2019b toolchain which is used to build GPAW.
 The foss toolchain contains the following modules:
 
 ```
@@ -144,7 +144,7 @@ Currently Loaded Modules:
 Step 4: Build the intel-2019b toolchain
 ---------------------------------------
 
-EasyBuild version 4.2.0 (and later) contains the intel-2019b toolchain which must be used to build GPAW.
+EasyBuild version 4.2.0 (and later) contains the intel-2019b toolchain which is used to build GPAW.
 The intel toolchain contains the following modules:
 
 ```
@@ -199,7 +199,7 @@ Build GPAW using the foss-2019b toolchain
 
 The GPAW release version 20.1.0 package is part of the EasyBuild official releases.
 
-Build the GPAW, GPAW-setups and ASE software modules with foss-2019b by:
+Build the GPAW, GPAW-setups and ASE software modules plus all prerequisites with foss-2019b by:
 ```
 eb GPAW-20.1.0-foss-2019b-Python-3.7.4.eb -r
 ```
@@ -209,7 +209,7 @@ Build GPAW using the intel-2019b toolchain
 
 The GPAW release version 20.1.0 package is part of the EasyBuild official releases.
 
-Build the GPAW, GPAW-setups and ASE software modules with intel-2019b by:
+Build the GPAW, GPAW-setups and ASE software modules plus all prerequisites with intel-2019b by:
 ```
 eb GPAW-20.1.0-intel-2019b-Python-3.7.4.eb -r
 ```
@@ -219,7 +219,7 @@ Run GPAW verification tests
 
 The GPAW verification tests are described in https://wiki.fysik.dtu.dk/gpaw/install.html#run-the-tests
 
-First select ONE of the GPAW modules as built in the above:
+First select one of the GPAW modules as built in the above:
 ```
 module load GPAW/20.1.0-intel-2019b-Python-3.7.4
 # module load GPAW/20.1.0-foss-2019b-Python-3.7.4
@@ -243,6 +243,11 @@ An example output file is [gpaw_test.txt](gpaw_test.txt/).
 
 Run the GPAW benchmarks
 -----------------------
+
+The GPAW benchmarks must be executed on a single compute node, 
+using all CPU cores available in the system.
+The node must contain the same processor SKU, memory size and speed, 
+BIOS settings, and system chassis as the servers offered.
 
 The subdirectory [benchmarks](benchmarks/) contains the Python scripts,
 batch job shell scripts, and any further input files.
