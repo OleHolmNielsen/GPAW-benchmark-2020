@@ -24,6 +24,8 @@ echo module load GPAW
 # module load GPAW/20.1.0-intel-2019b-Python-3.7.4
 # module load GPAW/20.1.0-foss-2019b-Python-3.7.4
 
+module load GPAW/20.1.0-foss-2019b-Python-3.7.4
+
 mpiexec gpaw info
 module list
 printenv|grep SLURM
