@@ -19,11 +19,12 @@ The present instructions are based upon EasyBuild version 4.2.0.
 
 In order to have a well-defined and reproducible software modules framework 
 for the purpose of comparing benchmark results obtained on different systems,
-we require the use of specific software module toolchains provided by EasyBuild version 4.2.0.
+we require the use of specific software module [toolchains](https://easybuild.readthedocs.io/en/latest/Common-toolchains.html)
+provided by EasyBuild version 4.2.0.
 Future versions of EasyBuild will contain newer toolchains in addition to
-the ones used in the present instruction.
+the ones used in the present instruction, but the versions specified below must nevertheless be used.
 
-The benchmark requires to build the GPAW code using one or both of the following 
+The benchmark requires to build the GPAW code using both of the following 
 EasyBuild software module toolchains:
 
 1. intel-2019b: icc, ifort, imkl, impi
@@ -219,10 +220,10 @@ Run GPAW verification tests
 
 The GPAW verification tests are described in https://wiki.fysik.dtu.dk/gpaw/install.html#run-the-tests
 
-First select one of the GPAW modules as built in the above:
+Execute both of the GPAW modules as built in the above, one after the other:
 ```
-module load GPAW/20.1.0-intel-2019b-Python-3.7.4
-# module load GPAW/20.1.0-foss-2019b-Python-3.7.4
+1: module load GPAW/20.1.0-foss-2019b-Python-3.7.4
+2: module load GPAW/20.1.0-intel-2019b-Python-3.7.4
 module list
 ```
 
@@ -260,7 +261,9 @@ Benchmark 1: MoS2-benchmark.sh
 Benchmark 2: Ru2Cl6-benchmark.sh
 ```
 
-The GPAW module with either intel or foss toolchain must be uncommented:
+Execute the benchmarks with both of the GPAW modules (foss-2019b and intel-2019b)
+as built in the above, one after the other.
+The GPAW module with either intel or foss toolchain must be uncommented in the scripts:
 
 ```
 # Select ONE of these modules:
@@ -315,5 +318,6 @@ $ grep Total: Ru2Cl6-benchmark.txt
 Total:                                       720.983 100.0%
 ```
 
-These ```Total:``` timings for Benchmarks 1 and 2 must be collected and rounded down to the nearest integer.
+These ```Total:``` timings for Benchmarks 1 and 2, executed with both the foss-2019b and intel-2019b toolchains,
+must be collected and rounded down to the nearest integer.
 The complete output files must also be collected and submitted.
